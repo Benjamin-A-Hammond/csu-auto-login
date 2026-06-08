@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CSU校园网自动登录
 // @namespace    csu-auto-login
-// @version      2.0
+// @version      2.1
 // @description  断网自动填账号密码、选运营商并登录
 // @match        *://portal.csu.edu.cn/*
 // @match        *://portal.csu.edu.cn:802/*
@@ -97,18 +97,6 @@
         }
         return false;
     }
-
-    // —— 弹窗兜底:万一还是弹了"请输入账号",自动点确定 ——
-    const popupObserver = new MutationObserver(() => {
-        const okBtn = document.querySelector('.layui-layer-btn0');
-        if (okBtn) {
-            const content = document.querySelector('.layui-layer-content');
-            const msg = content ? content.textContent.trim() : '';
-            okBtn.click();
-            toast('⚠️ 弹窗已自动关闭:' + msg, '#faad14');
-        }
-    });
-    popupObserver.observe(document.documentElement, { childList: true, subtree: true });
 
     // —— 主流程 ——
     function tryClick() {
